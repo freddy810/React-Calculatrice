@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 function faireCalcul(phrase) {
+
   //Pour / et *
   let nbrOperaterFoisOuDivision = 0;
   let nombre1 = '';
@@ -18,7 +19,8 @@ function faireCalcul(phrase) {
   let nombre4 = '';
   let nombre3EnSensNormal = '';
   let resultatPlusouMoins = 0;
-  let m = 0; let n = 0; let o = 0; let p = 0;
+  let m = 0; let n = 0; let o = 0; let p = 0; let q = 0;
+
 
   //connaitre le nombre des operateurs * ou / en premier
   for (let i = 0; i < phrase.length; i++) {
@@ -90,15 +92,11 @@ function faireCalcul(phrase) {
   //faire le calcul de * et / en priorité
   while (nbrOperaterPlusouMoins > 0) {
 
-    //Réperer le premier operateur * ou /
-    for (n = 0; n < nouveauPhrase.length; n++) {
+    for (n = 1; n < nouveauPhrase.length; n++) {
       if (nouveauPhrase[n] == '+' || nouveauPhrase[n] == '-') {
 
         //recuperer le premier nombre
         for (o = n - 1; o >= 0; o--) {
-          if (nouveauPhrase[o] == '*' || nouveauPhrase[o] == '/' || nouveauPhrase[o] == '+' || nouveauPhrase[o] == '-') {
-            break;
-          }
           nombre3 = nombre3 + nouveauPhrase[o];
         }
 
@@ -116,8 +114,20 @@ function faireCalcul(phrase) {
     }
 
 
-    //renverser le nombre1 car on l'a fait de sens inverse
-    nombre3EnSensNormal = nombre3.split('').reverse().join('');
+    //tester si il y a - au debut du premier nombre pour le renversement
+    if (nombre3[nombre3.length - 1] == '-') {
+      //effacer le '-' dans le nombre1
+      nombre3 = nombre3.replace("-", "");
+      //renverser le nombre1 car on l'a fait de sens inverse
+      nombre3EnSensNormal = nombre3.split('').reverse().join('');
+      //remettre le '-' dans le nombre1
+      nombre3EnSensNormal = "-" + nombre3EnSensNormal;
+    }
+    else {
+      //renverser le nombre1 car on l'a fait de sens inverse
+      nombre3EnSensNormal = nombre3.split('').reverse().join('');
+    }
+
 
     //faire l'operation
     if (nouveauPhrase[n] == '+') {
@@ -135,8 +145,8 @@ function faireCalcul(phrase) {
 
 
     nbrOperaterPlusouMoins--;
-  }
 
+  }
 
   return nouveauPhrase;
 
