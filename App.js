@@ -5,6 +5,9 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 //Importation de fichier 'faireCalcul.js'
 import faireCalcul from './components/faireCalcul';
 
+//Importation de fichier 'evenement.js'
+import creerEvenements from './components/evenement';
+
 //Importation des styles
 import conteneur from './styles/conteneur';
 import racineConvertisseur from './styles/racineConvertisseur';
@@ -16,14 +19,10 @@ export default function App() {
   const [valeur, setValeur] = useState('');
   const [egale, setEgale] = useState(false);
 
-  const ecrire9 = () => { setValeur(valeur + '9'); setEgale(false) }; const ecrire8 = () => { setValeur(valeur + '8'); setEgale(false) }; const ecrire7 = () => { setValeur(valeur + '7'); setEgale(false) }
-  const ecrire6 = () => { setValeur(valeur + '6'); setEgale(false) }; const ecrire5 = () => { setValeur(valeur + '5'); setEgale(false) }; const ecrire4 = () => { setValeur(valeur + '4'); setEgale(false) }
-  const ecrire3 = () => { setValeur(valeur + '3'); setEgale(false) }; const ecrire2 = () => { setValeur(valeur + '2'); setEgale(false) }; const ecrire1 = () => { setValeur(valeur + '1'); setEgale(false) }
-  const ecrire0 = () => { setValeur(valeur + '0'); setEgale(false) }; const appuieC = () => { setValeur(''); setEgale(false) }; const appuieBackSpace = () => { setValeur(valeur.slice(0, -1)); setEgale(false) }
-  const ecrirePlus = () => { setValeur(valeur + '+'); setEgale(false) }; const ecrireMoins = () => { setValeur(valeur + '-'); setEgale(false) };
-  const ecrireFois = () => { setValeur(valeur + '*'); setEgale(false) }; const ecrireDivision = () => { setValeur(valeur + '/'); setEgale(false) };
-  const ecrirePourcentage = () => { setValeur(valeur + '%'); setEgale(false) }; const ecrireVirgule = () => { setValeur(valeur + '.'); setEgale(false) };
-  const appuieEgale = () => { setValeur(faireCalcul(valeur)); setEgale(true) };
+  // Importation des fonctions événements
+  const { ecrire0, ecrire1, ecrire2, ecrire3, ecrire4, ecrire5, ecrire6, ecrire7, ecrire8, ecrire9, ecrirePlus, ecrireMoins, ecrireFois, ecrireDivision,
+    ecrirePourcentage, ecrireVirgule, appuieC, appuieBackSpace, appuieEgale
+  } = creerEvenements(valeur, setValeur, setEgale, faireCalcul);
 
   return (
     <View style={conteneur.container}>

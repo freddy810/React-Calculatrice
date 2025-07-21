@@ -18,9 +18,9 @@ export default function faireCalcul(phrase) {
     let m = 0; let n = 0; let o = 0; let p = 0; let q = 0;
 
     //-------------Pour le * et / -----------------------------------------------------------------------------------------------------------------------------------------
-    //connaitre le nombre des operateurs * ou / en premier
+    //connaitre le nombre des operateurs * ou / ou % en premier
     for (let i = 0; i < phrase.length; i++) {
-        if (phrase[i] == '*' || phrase[i] == '/') {
+        if (phrase[i] == '*' || phrase[i] == '/' || phrase[i] == '%') {
             nbrOperaterFoisOuDivision += 1;
         }
     }
@@ -30,11 +30,11 @@ export default function faireCalcul(phrase) {
 
         //Réperer le premier operateur * ou /
         for (j = 0; j < phrase.length; j++) {
-            if (phrase[j] == '*' || phrase[j] == '/') {
+            if (phrase[j] == '*' || phrase[j] == '/' || phrase[j] == '%') {
 
                 //recuperer le premier nombre
                 for (k = j - 1; k >= 0; k--) {
-                    if (phrase[k] == '*' || phrase[k] == '/' || phrase[k] == '+' || phrase[k] == '-') {
+                    if (phrase[k] == '*' || phrase[k] == '/' || phrase[k] == '+' || phrase[k] == '-' || phrase[k] == '%') {
                         break;
                     }
                     nombre1 = nombre1 + phrase[k];
@@ -42,7 +42,7 @@ export default function faireCalcul(phrase) {
 
                 //recuperer le deuxieme nombre
                 for (l = j + 1; l < phrase.length; l++) {
-                    if (phrase[l] == '*' || phrase[l] == '/' || phrase[l] == '+' || phrase[l] == '-') {
+                    if (phrase[l] == '*' || phrase[l] == '/' || phrase[l] == '+' || phrase[l] == '-' || phrase[l] == '%') {
                         break;
                     }
                     nombre2 = nombre2 + phrase[l];
@@ -62,6 +62,9 @@ export default function faireCalcul(phrase) {
         }
         else if (phrase[j] == '/') {
             resultatFoisOuDivision = parseFloat(nombre1EnSensNormal) / parseFloat(nombre2);
+        }
+        else if (phrase[j] == '%') {
+            resultatFoisOuDivision = parseFloat(nombre1EnSensNormal) * parseFloat(nombre2) / 100;
         }
 
         //changement dans la phrase
