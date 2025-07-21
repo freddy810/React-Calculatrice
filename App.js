@@ -5,70 +5,89 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 //Importation de fichier 'faireCalcul.js'
 import faireCalcul from './components/faireCalcul';
 
+//Importation des styles
+import conteneur from './styles/conteneur';
+import racineConvertisseur from './styles/racineConvertisseur';
+import conteneurBouton from './styles/conteneurBouton';
+
 export default function App() {
+
+  //pour les evenements 
+  const [valeur, setValeur] = useState('');
+  const [egale, setEgale] = useState(false);
+
+  const ecrire9 = () => { setValeur(valeur + '9'); setEgale(false) }; const ecrire8 = () => { setValeur(valeur + '8'); setEgale(false) }; const ecrire7 = () => { setValeur(valeur + '7'); setEgale(false) }
+  const ecrire6 = () => { setValeur(valeur + '6'); setEgale(false) }; const ecrire5 = () => { setValeur(valeur + '5'); setEgale(false) }; const ecrire4 = () => { setValeur(valeur + '4'); setEgale(false) }
+  const ecrire3 = () => { setValeur(valeur + '3'); setEgale(false) }; const ecrire2 = () => { setValeur(valeur + '2'); setEgale(false) }; const ecrire1 = () => { setValeur(valeur + '1'); setEgale(false) }
+  const ecrire0 = () => { setValeur(valeur + '0'); setEgale(false) }; const appuieC = () => { setValeur(''); setEgale(false) }; const appuieBackSpace = () => { setValeur(valeur.slice(0, -1)); setEgale(false) }
+  const ecrirePlus = () => { setValeur(valeur + '+'); setEgale(false) }; const ecrireMoins = () => { setValeur(valeur + '-'); setEgale(false) };
+  const ecrireFois = () => { setValeur(valeur + '*'); setEgale(false) }; const ecrireDivision = () => { setValeur(valeur + '/'); setEgale(false) };
+  const ecrirePourcentage = () => { setValeur(valeur + '%'); setEgale(false) }; const ecrireVirgule = () => { setValeur(valeur + '.'); setEgale(false) };
+  const appuieEgale = () => { setValeur(faireCalcul(valeur)); setEgale(true) };
+
   return (
-    <View style={styles.container}>
+    <View style={conteneur.container}>
 
       {/*--------------Racine et convertisseur en haut ------------------------------------------------------*/}
-      <View style={styles.racineEtConvertisseur}>
-        <TouchableOpacity><Text style={styles.textRacineCarree}>√x</Text></TouchableOpacity>
-        <TouchableOpacity><Text style={styles.textConvertisseur}>($)</Text></TouchableOpacity>
+      <View style={racineConvertisseur.racineEtConvertisseur}>
+        <TouchableOpacity><Text style={racineConvertisseur.textRacineCarree}>√x</Text></TouchableOpacity>
+        <TouchableOpacity><Text style={racineConvertisseur.textConvertisseur}>($)</Text></TouchableOpacity>
       </View>
 
       {/*--------------le tiret ------------------------------------------------------*/}
-      <TouchableOpacity><Text style={styles.tiret}>—</Text></TouchableOpacity>
+      <TouchableOpacity><Text style={conteneurBouton.tiret}>—</Text></TouchableOpacity>
 
       {/*--------------Le conteneur de tous les boutons ------------------------------------------------------*/}
-      <View style={styles.conteneurBoutons}>
+      <View style={conteneurBouton.conteneurBoutons}>
 
         {/*------1ere etage ------*/}
-        <View style={styles.etage1}>
-          <TouchableOpacity><Text style={styles.leC}>C</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.leDivision}>÷</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.leFois}>×</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.leBackSpace}>⌫</Text></TouchableOpacity>
+        <View style={conteneurBouton.etage1}>
+          <TouchableOpacity onLongPress={appuieC} delayLongPress={10}><Text style={conteneurBouton.leC}>C</Text></TouchableOpacity>
+          <TouchableOpacity onLongPress={ecrireDivision} delayLongPress={10}><Text style={conteneurBouton.leDivision}>÷</Text></TouchableOpacity>
+          <TouchableOpacity onLongPress={ecrireFois} delayLongPress={10}><Text style={conteneurBouton.leFois}>×</Text></TouchableOpacity>
+          <TouchableOpacity onLongPress={appuieBackSpace} delayLongPress={10}><Text style={conteneurBouton.leBackSpace}>⌫</Text></TouchableOpacity>
         </View>
 
         {/*------2e etage ------*/}
-        <View style={styles.etage2}>
-          <TouchableOpacity><Text style={styles.le7}>7</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.le8}>8</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.le9}>9</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.leMoins}>–</Text></TouchableOpacity>
+        <View style={conteneurBouton.etage2}>
+          <TouchableOpacity onLongPress={ecrire7} delayLongPress={10}><Text style={conteneurBouton.le7}>7</Text></TouchableOpacity>
+          <TouchableOpacity onLongPress={ecrire8} delayLongPress={10}><Text style={conteneurBouton.le8}>8</Text></TouchableOpacity>
+          <TouchableOpacity onLongPress={ecrire9} delayLongPress={10}><Text style={conteneurBouton.le9}>9</Text></TouchableOpacity>
+          <TouchableOpacity onLongPress={ecrireMoins} delayLongPress={10}><Text style={conteneurBouton.leMoins}>–</Text></TouchableOpacity>
         </View>
 
         {/*------3e etage ------*/}
-        <View style={styles.etage3}>
-          <TouchableOpacity><Text style={styles.le4}>4</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.le5}>5</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.le6}>6</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.lePlus}>+</Text></TouchableOpacity>
+        <View style={conteneurBouton.etage3}>
+          <TouchableOpacity onLongPress={ecrire4} delayLongPress={10} ><Text style={conteneurBouton.le4}>4</Text></TouchableOpacity>
+          <TouchableOpacity onLongPress={ecrire5} delayLongPress={10}><Text style={conteneurBouton.le5}>5</Text></TouchableOpacity>
+          <TouchableOpacity onLongPress={ecrire6} delayLongPress={10}><Text style={conteneurBouton.le6}>6</Text></TouchableOpacity>
+          <TouchableOpacity onLongPress={ecrirePlus} delayLongPress={10}><Text style={conteneurBouton.lePlus}>+</Text></TouchableOpacity>
         </View>
 
         {/*------4e etage ------*/}
-        <View style={styles.etage4}>
-          <TouchableOpacity><Text style={styles.le1}>1</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.le2}>2</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.le3}>3</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.lePlus2}>+</Text></TouchableOpacity> {/*------ Permet de reserver de la place ------*/}
+        <View style={conteneurBouton.etage4}>
+          <TouchableOpacity onLongPress={ecrire1} delayLongPress={10}><Text style={conteneurBouton.le1}>1</Text></TouchableOpacity>
+          <TouchableOpacity onLongPress={ecrire2} delayLongPress={10}><Text style={conteneurBouton.le2}>2</Text></TouchableOpacity>
+          <TouchableOpacity onLongPress={ecrire3} delayLongPress={10}><Text style={conteneurBouton.le3}>3</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={conteneurBouton.lePlus2}>+</Text></TouchableOpacity> {/*------ Permet de reserver de la place ------*/}
         </View>
 
         {/*------5e etage ------*/}
-        <View style={styles.etage5}>
-          <TouchableOpacity><Text style={styles.lePourcentage}>%</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.le0}>0</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.leVirgule}>,</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={styles.lePlus2}>+</Text></TouchableOpacity>  {/*------ Permet de reserver de la place ------*/}
+        <View style={conteneurBouton.etage5}>
+          <TouchableOpacity onLongPress={ecrirePourcentage} delayLongPress={10}><Text style={conteneurBouton.lePourcentage}>%</Text></TouchableOpacity>
+          <TouchableOpacity onLongPress={ecrire0} delayLongPress={10}><Text style={conteneurBouton.le0}>0</Text></TouchableOpacity>
+          <TouchableOpacity onLongPress={ecrireVirgule} delayLongPress={10}><Text style={conteneurBouton.leVirgule}>{'\u002C'}</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={conteneurBouton.lePlus2}>+</Text></TouchableOpacity>  {/*------ Permet de reserver de la place ------*/}
         </View>
 
         {/*------le bouton égale ------*/}
-        <TouchableOpacity><Text style={styles.leEgal}>＝</Text></TouchableOpacity>
+        <TouchableOpacity onLongPress={appuieEgale} delayLongPress={10}><Text style={conteneurBouton.leEgal}>＝</Text></TouchableOpacity>
 
         {/*------le champ pour saisir ------*/}
-        <TextInput style={styles.champSaisi}></TextInput>
+        <TextInput style={conteneurBouton.champSaisi} editable={false} value={valeur}></TextInput>
 
         {/*------le champ pour le resultat ------*/}
-        <TextInput style={styles.champResultat} editable={false}></TextInput>
+        <TextInput style={[conteneurBouton.champResultat, { display: egale ? 'none' : '' }]} editable={false} value={faireCalcul(valeur)}></TextInput>
 
       </View>
 
@@ -76,229 +95,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'rgb(250, 250, 250)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  //--------------Racine et convertisseur en haut ------------------------------------------------------
-  racineEtConvertisseur: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    width: '100%',
-    position: 'absolute', top: 50,
-  },
-
-  textRacineCarree: {
-    marginRight: 15,
-    fontSize: 16,
-  },
-
-  textConvertisseur: {
-    marginRight: 15,
-    fontSize: 15,
-  },
-
-  /*--------------Le conteneur de tous les boutons ------------------------------------------------------*/
-  conteneurBoutons: {
-    position: 'absolute',
-    top: 360,
-    backgroundColor: 'white',
-    width: '100%',
-    height: '70%',
-    flexDirection: 'column',
-  },
-
-  //-------etage1-------------------------------
-  etage1: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginTop: 25,
-  },
-
-  leC: {
-    color: '#2474fb',
-    fontSize: 22,
-    marginTop: -2,
-  },
-
-  leDivision: {
-    color: '#2474fb',
-    fontSize: 30,
-  },
-
-  leFois: {
-    color: '#2474fb',
-    fontSize: 30,
-  },
-
-  leBackSpace: {
-    color: '#2474fb',
-    fontSize: 20,
-    marginTop: 5,
-  },
-
-  tiret: {
-    color: '#949494',
-    fontSize: 40,
-    position: 'absolute',
-    top: -90, left: -23,
-  },
-
-  //-------------etage2--------------------------
-  etage2: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginTop: 25,
-  },
-
-  le7: {
-    fontSize: 22,
-    marginTop: -2,
-  },
-
-  le8: {
-    fontSize: 22,
-    marginTop: -2,
-  },
-
-  le9: {
-    fontSize: 22,
-    marginTop: -2,
-  },
-
-  leMoins: {
-    color: '#2474fb',
-    fontSize: 30,
-    marginTop: -2,
-  },
-
-  //-------------etage3--------------------------
-  etage3: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginTop: 25,
-  },
-
-  le4: {
-    marginTop: -2,
-    fontSize: 22,
-  },
-
-  le5: {
-    fontSize: 22,
-  },
-
-  le6: {
-    fontSize: 22,
-  },
-
-  lePlus: {
-    color: '#2474fb',
-    fontSize: 30,
-    marginRight: 2,
-  },
-
-  //-------------etage4--------------------------
-  etage4: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginTop: 25,
-  },
-
-  le1: {
-    fontSize: 22,
-  },
-
-  le2: {
-    fontSize: 22,
-  },
-
-  le3: {
-    fontSize: 22,
-    marginLeft: -4,
-  },
-
-  lePlus2: {
-    color: 'white',
-    fontSize: 30,
-    marginRight: 2,
-  },
-
-  //-------------etage5--------------------------
-  etage5: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginTop: 25,
-  },
-
-  lePourcentage: {
-    fontSize: 22,
-    marginTop: -5,
-  },
-
-  le0: {
-    fontSize: 22,
-    marginLeft: -4,
-  },
-
-  leVirgule: {
-    fontSize: 26,
-    marginTop: -20,
-    marginLeft: -4,
-
-  },
-
-  lePlus2: {
-    color: 'white',
-    fontSize: 30,
-    marginRight: 2,
-  },
-
-  //-------------le bouton egal--------------------------
-  leEgal: {
-    color: 'white',
-    backgroundColor: '#2474fb',
-    width: '17%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute', right: 19, top: -135,
-    paddingLeft: 12, paddingTop: 40, paddingBottom: 40, paddingRight: 10,
-    borderRadius: 10,
-    fontSize: 30,
-  },
-
-  //------le champ pour saisir ------
-  champSaisi: {
-    fontSize: 40,
-    backgroundColor: 'rgb(250, 250, 250)',
-    width: '97%',
-    position: 'absolute', top: -175,
-    //permet de placer le curseur à droite
-    textAlign: 'right',
-  },
-
-  //------le champ pour le resulta ------
-  champResultat: {
-    fontSize: 25,
-    backgroundColor: 'rgb(250, 250, 250)',
-    width: '97%',
-    height: '15%',
-    position: 'absolute', top: -109,
-    //permet de placer le curseur à droite
-    textAlign: 'right',
-    color: 'rgb(30, 29, 29)',
-    //pour ne pas l'afficher
-    display: 'none',
-  }
-
-});
